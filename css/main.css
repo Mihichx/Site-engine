@@ -536,6 +536,7 @@ footer h3, footer p {
 
 .vase-card img {
     max-width: 270px;
+    width: 270px;
     max-height: 246px;
     background-color: white;
     margin-bottom: 15px;
