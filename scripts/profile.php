@@ -2,6 +2,34 @@
     $redirect_url = "/profile";
     include './scripts/entrance.php';
 
+
+    if (isset($_POST['update_profile']) && isset($_SESSION['user']['id'])) {
+        $user_id = $_SESSION['user']['id'];
+        
+        $stmt = $pdo->prepare("SELECT password FROM users WHERE id = :id");
+        $stmt->execute([':id' => $user_id]);
+        $current_db_user = $stmt->fetch();
+
+        if ($current_db_user && password_verify($_POST['old_password'], $current_db_user['password'])) {
+            $newData = [
+                'login'    => trim($_POST['login']),
+                'email'    => trim($_POST['email']),
+                'password' => $_POST['new_password']
+            ];
+
+            if (updateUser($pdo, $user_id, $newData)) {
+                $_SESSION['user']['login'] = $newData['login'];
+                $_SESSION['user']['email'] = $newData['email'];
+                $color_status = "green";
+            } else {
+                $status = "Ошибка при обновлении!";
+            }
+        } else {
+            $status = "Старый пароль введен неверно!";
+        }
+    }
+
+    
     // AJAX ответ после логина/регистрации
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
         header('Content-Type: application/json');

@@ -41,10 +41,10 @@
         $response = ['status' => '', 'color' => 'red'];
 
         if (isset($_SESSION['user']['login'])) {
-            $stmt = $pdo->prepare("SELECT name FROM reviews WHERE name = :name");
-            $stmt->execute([':name' => $_SESSION['user']['login']]);
+            $stmt = $pdo->prepare("SELECT user_id FROM orders WHERE user_id = :user_id");
+            $stmt->execute([':user_id' => $_SESSION['user']['id']]);
 
-            if (!$stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($stmt->fetch(PDO::FETCH_ASSOC)) {
                 $name = trim($_POST['rev_name']);
                 $rating = $_POST['rev_rating'];
                 $text = trim($_POST['rev_text']);
@@ -57,7 +57,7 @@
                     $response['status'] = "Заполните все поля!";
                 }
             } else {
-                $response['status'] = "Вы уже оставляли отзыв!";
+                $response['status'] = "Сделайте заказ, чтобы оставить отзыв";
             }
         } else {
             $response['status'] = "Сначала авторизуйтесь";

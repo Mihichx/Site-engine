@@ -81,11 +81,40 @@
                     'title'    => 'Управление страницами сайта',
                     'fields'   => [
                         'id'    => 'ID',
-                        'slug'  => 'URL-адрес (about, contacts, actions)',
+                        'slug'  => 'URL-адрес',
                         'title' => 'Заголовок страницы',
                         'content' => 'Содержимое (HTML)',
-                        'header_content' => 'Контент шапки',
+                        'header_content' => 'Контент шапки (HTML)',
                         'in_menu' => 'Какое-меню (0 - не в меню, 1 - верхнее, 2 - админское)'
+                    ]
+                ],
+                'stock1' => [
+                    'db_table' => 'stock',
+                    'title'    => 'Акции',
+                    'fields'   => [
+                        'id'    => 'ID',
+                        'title' => 'Заголовок',
+                        'description' => 'Описание',
+                        'image' => 'Изображение',
+                        'type' => 'Тип акции'
+                    ]
+                ],
+                'order1' => [
+                    'db_table' => 'orders',
+                    'title'    => 'Заказы',
+                    'fields'   => [
+                        'id'             => 'ID',
+                        'user_id'        => 'ID пользователя',
+                        'city'           => 'Город',
+                        'phone'          => 'Телефон',
+                        'address'        => 'Адрес',
+                        'postal_code'    => 'Почтовый индекс',
+                        'notes'          => 'Заметки',
+                        'payment_method' => 'Способ оплаты',
+                        'total_price'    => 'Итоговая цена',
+                        'products_json'  => 'Товары (JSON)',
+                        'created_at'     => 'Дата создания',
+                        'status'         => 'Статус'
                     ]
                 ]
             ];
@@ -197,7 +226,7 @@
                 
                 $content .= '<h2>' . $config['title'] . '</h2>';
                 
-                if ($slug !== 'reviews1') {
+                if ($slug !== 'reviews1' && $slug !== 'order1') {
                     $content .= '<button class="hover" onclick="openModal()" style="margin-bottom:15px; background:#28a745; color:white; padding:8px 15px; border:none; border-radius:4px; cursor:pointer;">+ Добавить запись</button>';
                 }
                 
@@ -205,7 +234,7 @@
                 foreach ($config['fields'] as $label) {
                     $content .= '<th>' . htmlspecialchars($label) . '</th>';
                 }
-                $content .= '<th>Действия</th></tr></thead><tbody>';
+                $content .= '<th>Действия</th><tr></thead><tbody>';
 
                 foreach ($rows as $row) {
                     $content .= '<tr>';
@@ -239,8 +268,7 @@
                         $content .= '<a href="/admin/reviews1?toggle_status_id=' . $row['id'] . '&current_status=' . $row['status'] . '" class="admin-button hover" style="padding:4px 8px; text-decoration:none; font-size:13px; border-radius:3px;' . $btn_style . '">' . $btn_text . '</a>';
                     } else {
                         // Блокировка редактирования критических данных
-                        $is_locked = ($slug === 'users' && ($row['id'] == $current_user_id || $row['role'] === 'admin'));
-                        
+                        $is_locked = ($slug === 'users' && ($row['id'] == $current_user_id || $row['role'] === 'admin')) || ($slug === 'order1');
                         if (!$is_locked) {
                             $content .= '<button class="admin-button edit hover" style="background:#ffc107; padding:4px 8px; border:none; cursor:pointer;" onclick=\'editRow(' . $jsonData . ')\'>Изм.</button>';
                             $content .= '<a href="/admin/' . $slug . '?delete_row_id=' . $row['id'] . '" class="admin-button delete hover" style="background:#dc3545; color:white; padding:4px 8px; text-decoration:none; margin-left:5px; font-size:13px; border-radius:3px;" onclick="return confirm(\'Удалить эту запись?\')">Удл.</a>';
@@ -325,23 +353,84 @@
                     </script>';
                 }
 
+            } elseif ($slug === 'statistics') {
+                // =============================================================
+                // СТРАНИЦА СТАТИСТИКИ
+                // =============================================================
+                
+                try {
+                    // Всего заказов
+                    $stmt = $pdo->query("SELECT COUNT(*) as total FROM orders");
+                    $total_orders = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+                    
+                    // Заказов сегодня
+                    $stmt = $pdo->query("SELECT COUNT(*) as today FROM orders WHERE DATE(created_at) = CURDATE()");
+                    $today_orders = $stmt->fetch(PDO::FETCH_ASSOC)['today'];
+                    
+                    // Заказов в этом месяце
+                    $stmt = $pdo->query("SELECT COUNT(*) as month FROM orders WHERE MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE())");
+                    $month_orders = $stmt->fetch(PDO::FETCH_ASSOC)['month'];
+                    
+                    // Средний чек
+                    $stmt = $pdo->query("SELECT AVG(total_price) as avg_price FROM orders WHERE total_price > 0");
+                    $avg_check = $stmt->fetch(PDO::FETCH_ASSOC)['avg_price'];
+                    $avg_check = round($avg_check, 0);
+                    
+                    // Динамика: прошлый месяц (для общего кол-ва)
+                    $stmt = $pdo->query("SELECT COUNT(*) as last_month FROM orders WHERE MONTH(created_at) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND YEAR(created_at) = YEAR(CURDATE() - INTERVAL 1 MONTH)");
+                    $last_month_total = $stmt->fetch(PDO::FETCH_ASSOC)['last_month'];
+                    $percent_total = ($last_month_total > 0) ? round((($total_orders - $last_month_total) / $last_month_total) * 100) : 0;
+                    
+                    // Динамика: вчера
+                    $stmt = $pdo->query("SELECT COUNT(*) as yesterday FROM orders WHERE DATE(created_at) = CURDATE() - INTERVAL 1 DAY");
+                    $yesterday = $stmt->fetch(PDO::FETCH_ASSOC)['yesterday'];
+                    $percent_today = ($yesterday > 0) ? round((($today_orders - $yesterday) / $yesterday) * 100) : 0;
+                    
+                    // Динамика: прошлый месяц (для месячных заказов)
+                    $stmt = $pdo->query("SELECT COUNT(*) as last_month FROM orders WHERE MONTH(created_at) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND YEAR(created_at) = YEAR(CURDATE() - INTERVAL 1 MONTH)");
+                    $last_month_monthly = $stmt->fetch(PDO::FETCH_ASSOC)['last_month'];
+                    $percent_month = ($last_month_monthly > 0) ? round((($month_orders - $last_month_monthly) / $last_month_monthly) * 100) : 0;
+                    
+                    // Динамика: средний чек
+                    $stmt = $pdo->query("SELECT AVG(total_price) as avg_price FROM orders WHERE MONTH(created_at) = MONTH(CURDATE() - INTERVAL 1 MONTH) AND YEAR(created_at) = YEAR(CURDATE() - INTERVAL 1 MONTH) AND total_price > 0");
+                    $last_month_avg = $stmt->fetch(PDO::FETCH_ASSOC)['avg_price'];
+                    $last_month_avg = ($last_month_avg !== null) ? round($last_month_avg, 0) : 0;
+                    $percent_avg = ($last_month_avg > 0) ? round((($avg_check - $last_month_avg) / $last_month_avg) * 100) : 0;
+                    
+                } catch (PDOException $e) {
+                    $total_orders = 0;
+                    $today_orders = 0;
+                    $month_orders = 0;
+                    $avg_check = 0;
+                    $percent_total = 0;
+                    $percent_today = 0;
+                    $percent_month = 0;
+                    $percent_avg = 0;
+                }
+                
+                $content .= '<h2>Статистика заказов</h2>';
+                $content .= '<hr>';
+                $content .= '<p><strong>Всего заказов:</strong> ' . number_format($total_orders, 0, '', ' ') . ' (' . ($percent_total >= 0 ? '+' : '') . $percent_total . '% от прошлого месяца)</p>';
+                $content .= '<p><strong>Сегодня заказов:</strong> ' . number_format($today_orders, 0, '', ' ') . ' (' . ($percent_today >= 0 ? '+' : '') . $percent_today . '% от вчера)</p>';
+                $content .= '<p><strong>Заказов в этом месяце:</strong> ' . number_format($month_orders, 0, '', ' ') . ' (' . ($percent_month >= 0 ? '+' : '') . $percent_month . '% от прошлого месяца)</p>';
+                $content .= '<p><strong>Средний чек:</strong> ' . number_format($avg_check, 0, '', ' ') . ' руб. (' . ($percent_avg >= 0 ? '+' : '') . $percent_avg . '% от прошлого месяца)</p>';
+                $content .= '<hr>';
+                
             } else {
-                // Если запрашивается вкладка статистики (`statistics`) или любая другая страница из роутера
-                    // Главный экран авторизованного пользователя (вместо вывода формы из БД)
-                    $content .= '
-                    <div style="text-align: center; margin-top: 50px;">
-                        <h1>Панель управления сайтом</h1>
-                        <p>Вы успешно вошли как: <strong>' . htmlspecialchars($_SESSION['user']['login']) . '</strong> (' . htmlspecialchars($user_role) . ')</p>
-                        <p style="margin-top: 20px; font-size: 16px; color: #555;">Используйте верхнее навигационное меню, чтобы переключаться между таблицами управления.</p>
-                        
-                        <div style="margin-top: 40px;">
-                            <form method="POST">
-                                <input type="hidden" name="logout" value="1">
-                                <button class="hover" style="background:#dc3545; color:white; border:none; padding:10px 25px; font-size:15px; border-radius:4px; cursor:pointer;" type="submit">Выйти из системы</button>
-                            </form>
-                        </div>
-                    </div>';
-
+                // Главный экран авторизованного пользователя
+                $content .= '
+                <div style="text-align: center; margin-top: 50px;">
+                    <h1>Панель управления сайтом</h1>
+                    <p>Вы успешно вошли как: <strong>' . htmlspecialchars($_SESSION['user']['login']) . '</strong> (' . htmlspecialchars($user_role) . ')</p>
+                    <p style="margin-top: 20px; font-size: 16px; color: #555;">Используйте верхнее навигационное меню, чтобы переключаться между таблицами управления.</p>
+                    
+                    <div style="margin-top: 40px;">
+                        <form method="POST">
+                            <input type="hidden" name="logout" value="1">
+                            <button class="hover" style="background:#dc3545; color:white; border:none; padding:10px 25px; font-size:15px; border-radius:4px; cursor:pointer;" type="submit">Выйти из системы</button>
+                        </form>
+                    </div>
+                </div>';
             }
 
             // ПРИНУДИТЕЛЬНО очищаем старую форму входа из переменной шаблона, так как админ УЖЕ вошел
