@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 19 2026 г., 22:54
--- Версия сервера: 8.0.19
--- Версия PHP: 7.1.33
+-- Время создания: Май 20 2026 г., 16:22
+-- Версия сервера: 8.0.30
+-- Версия PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `homedecor`
+-- База данных: `HomeDecor`
 --
 
 -- --------------------------------------------------------
@@ -99,13 +99,6 @@ CREATE TABLE `orders` (
   `status` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'process'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Дамп данных таблицы `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `city`, `phone`, `address`, `postal_code`, `notes`, `payment_method`, `total_price`, `products_json`, `created_at`, `status`) VALUES
-(14, 6, 'asd', 'asda', 'dasdas', 'dasdas', 'dasdas', 'cash', 648, '[{\"id\":1,\"name\":\"Ваза из прозрачного стекла 15 см\",\"image\":\"img\\/vase1.jpg\",\"price\":810,\"quantity\":1,\"sum\":810}]', '2026-05-19 16:02:12', 'new');
-
 -- --------------------------------------------------------
 
 --
@@ -149,7 +142,9 @@ INSERT INTO `pages` (`id`, `slug`, `title`, `content`, `header_content`, `in_men
 (27, 'card_product_basket', '', '<div class=\"cart-item\">\r\n    <div class=\"item-image\">\r\n        <img src=\"{{ img }}\" loading=\"lazy\" alt=\"Ваза\">\r\n    </div>\r\n\r\n    <div class=\"item-info\">\r\n        <h3 class=\"item-name\">{{ name }}</h3>\r\n        <p class=\"item-number\">Номер товара:<br>{{ id }}</p>\r\n    </div>\r\n\r\n    <div class=\"item-price\">\r\n        <span class=\"price-one\" data-price=\"{{ price_clean }}\">{{ price }}</span> руб.\r\n        <p class=\"price-label\">цена за 1 шт.</p>\r\n    </div>\r\n\r\n    <div class=\"item-quantity\">\r\n        <button class=\"btn-quantity minus\">−</button>\r\n        <input type=\"text\" value=\"{{ quantity }}\" class=\"quantity-input\" readonly>\r\n        <button class=\"btn-quantity plus\">+</button>\r\n    </div>\r\n\r\n    <div class=\"item-total\">{{ end_price }} руб.</div>\r\n</div>', '', 0),
 (28, 'order', 'Оформление', '<div class=\"container-checkout\">\r\n    <h1>Оформление заказа</h1>\r\n\r\n    <form class=\"left-side\" method=\"POST\">\r\n        <div class=\"delivery\">\r\n            <label>Доставка в</label>\r\n            <input type=\"text\" name=\"city\" placeholder=\"Укажите ваш город\" required>\r\n        </div>\r\n\r\n        <div class=\"row-3\">\r\n            <input type=\"text\" name=\"fullname\" placeholder=\"Фамилия и имя\" value=\"{{ name }}\" readonly>\r\n            <input type=\"tel\" name=\"phone\" placeholder=\"Телефон\" required>\r\n            <input type=\"email\" name=\"email\" placeholder=\"E-mail\" value=\"{{ email }}\" readonly>\r\n        </div>\r\n\r\n        <div class=\"row-2\">\r\n            <input type=\"text\" name=\"address\" placeholder=\"Адрес\" required>\r\n            <input type=\"text\" name=\"postal_code\" placeholder=\"Почтовый индекс\" required>\r\n        </div>\r\n\r\n        <textarea name=\"notes\" placeholder=\"Примечания покупателя\"></textarea>\r\n\r\n        <div class=\"payment\">\r\n            <h2>Способы оплаты</h2>\r\n            <div class=\"payment-methods\">\r\n                <button type=\"button\" class=\"payment-card\" data-payment=\"cash\">Оплата наличными при получении</button>\r\n                <button type=\"button\" class=\"payment-card\" data-payment=\"card\">Оплата банковской картой при получении</button>\r\n                <button type=\"button\" class=\"payment-card\" data-payment=\"sberbank\">На карту Сбербанка № 2202 3245 7896 5467</button>\r\n                <button type=\"button\" class=\"payment-card\" data-payment=\"cod\">Наложенный платёж (стоимость увеличивается на 5%)</button>\r\n            </div>\r\n            <!-- Скрытое поле для передачи выбранного метода на сервер -->\r\n            <input type=\"hidden\" name=\"payment_method\" id=\"selectedPayment\" required>\r\n        </div>\r\n\r\n        <div class=\"checkboxes\">\r\n            <div class=\"checkbox-row\">\r\n                <input type=\"checkbox\" id=\"terms\" required>\r\n                <label for=\"terms\">Отметьте флажок, чтобы принять <a href=\"#\">Условия использования</a></label>\r\n            </div>\r\n            <div class=\"checkbox-row\">\r\n                <input type=\"checkbox\" id=\"personal\" required>\r\n                <label for=\"personal\">Я согласен/согласна на обработку своих <a href=\"#\">персональных данных</a> указанным образом</label>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"column\">\r\n            <button type=\"submit\" class=\"btn-order\">Оформить заказ ({{ final_price }} руб.)</button>\r\n            <button onclick=\"history.back();\" class=\"btn-order\">Назад</button>\r\n        </div>\r\n    </form>\r\n</div>', '', 0),
 (30, 'card_review', '', '<div class=\"reviews-card\">\r\n    <div class=\"review-content\">\r\n        <div class=\"review-top\">\r\n            <span class=\"stars\">{{ stars }}</span>\r\n            <span class=\"date\">{{ date }}</span>\r\n        </div>\r\n        <h3>{{ name }}</h3>\r\n        <p>«{{ description }}»</p>\r\n    </div>\r\n</div>', '', 0),
-(31, 'pages', 'Страницы', '', '', 2);
+(31, 'pages', 'Страницы', '', '', 2),
+(32, 'stock1', 'Акции', '', '', 2),
+(33, 'order1', 'Заказы', '', '', 2);
 
 -- --------------------------------------------------------
 
@@ -294,13 +289,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `email`, `password`, `role`, `date_regist`) VALUES
-(6, 'Михаил', 'misha777px@gmail.com', '$2y$10$asLsbZgFGEELpMpHIEFKn.YszskWRg2CfqufPMV4A5j0BK199GTAG', 'admin', '2026-05-07'),
+(6, 'Михаил', 'misha777px@gmail.com', '$2y$10$IVqvGoLq5DlNMs1gfYfpI.eRa2xTPrXrHmJkU2JGanvH1ZR/FX4Wu', 'admin', '2026-05-07'),
 (8, 'Миша', 'misha7277px@gmail.com', '$2y$10$wiKMoz0dzklb0iZPZw.vZOEm38CbBDUUyb9AM79qfywPlcJWlBgUW', 'moderator', '2026-05-07'),
 (9, 'Миш', '', '$2y$10$pdwKm/mno1UGxU63NZD/SeLeZNkd.DAiPPVIVOZHFTPJlrITsmGOO', 'user', '2026-05-07'),
 (22, 'Анна', 'anna@gmail.com', '$2y$10$qN0NY.s0BR5uZzpJn9SgiegnIGmXtiaJoBNiD83NmETdhL/B6Jara', 'user', '2026-05-19'),
 (23, 'Екатерина', 'ekaterina@gmail.com', '$2y$10$RQYTq.Eh7iQJKYtfCuefnuKanHJnCAnI1RO3oWXU.bUAmyDOmezdC', 'user', '2026-05-19'),
 (24, 'Дмитрий', 'dmitri@gmail.com', '$2y$10$D48gRN4v1.cqvfJO0SnqAOkw0BCU99PQLQWr6AICgQndQ2kQAKKqK', 'user', '2026-05-19'),
-(25, 'df', 'suharevaangelina4@gmail.com', '$2y$10$K5iYyIVaXY5flYGMsG9Sf.9tPw1ZdnONgx3pcuB.DbrhPicl/fjpy', 'user', '2026-05-19');
+(25, 'df', 'suharevaangelina4@gmail.com', '$2y$10$K5iYyIVaXY5flYGMsG9Sf.9tPw1ZdnONgx3pcuB.DbrhPicl/fjpy', 'admin', '2026-05-19');
 
 --
 -- Индексы сохранённых таблиц
@@ -397,13 +392,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
@@ -415,7 +410,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT для таблицы `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT для таблицы `settings`
