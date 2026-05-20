@@ -8,6 +8,7 @@
 		<script src="/js/interceptor.js"></script>
 		<script src="/js/basket.js"></script>
 		<script src="/js/order.js"></script>
+		<script src="/js/slider.js"></script>
 	</head>
 	<body>
 		<header class="center column">
