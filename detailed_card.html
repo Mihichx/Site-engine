@@ -30,24 +30,9 @@
         </div>
 
         <div class="product-description">
-            <p>Минималистичная ваза из прозрачного стекла — универсальное решение для повседневного декора...</p>
-            <p>Благодаря нейтральному дизайну ваза подходит для одиночных веток, полевых цветов...</p>
+            <p>{{ description }}</p>
+            <p>{{ more_description }}</p>
         </div>
     </div>
 </section>
 
-<div class="vase-card">
-    <a href="{{ product_url }}">
-        <img src="{{ image }}" loading="lazy" alt="Ваза">
-        <div class="center column">
-            <p class="vase-name">{{ name }}</p>
-            <p class="vase-prise">{{ price }}</p>
-        </div>
-    </a>
-    <div class="center column add-button hover">
-        <form method="POST">
-            <input name="id" type="hidden" value="{{ id }}"></input>
-            <button name="addItem" type="submit">Добавить</button>
-        </form>
-    </div>
-</div>

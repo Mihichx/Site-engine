@@ -3,7 +3,7 @@
     $found_products = searchALL($pdo, 'products', 'id', $_GET['id']);
     $title = $found_products[0]['name'];
     $products_html = str_replace(
-        ['{{ img }}', '{{ id }}', '{{ material }}', '{{ color }}', '{{ height }}', '{{ length }}', '{{ width }}', '{{ weight }}', '{{ price }}', '{{ name }}', '{{ title }}'],
+        ['{{ img }}', '{{ id }}', '{{ material }}', '{{ color }}', '{{ height }}', '{{ length }}', '{{ width }}', '{{ weight }}', '{{ price }}', '{{ description }}', '{{ more_description }}', '{{ name }}', '{{ title }}'],
         [   
             htmlspecialchars('/' . $found_products[0]['image']), 
             htmlspecialchars($found_products[0]['id']), 
@@ -14,6 +14,8 @@
             htmlspecialchars($found_products[0]['width']),
             htmlspecialchars($found_products[0]['weight']),
             htmlspecialchars($found_products[0]['price']),
+            htmlspecialchars($found_products[0]['description']),
+            htmlspecialchars($found_products[0]['more_description']),
             htmlspecialchars($found_products[0]['name']),
             htmlspecialchars($title)
         ],
