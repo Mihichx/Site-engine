@@ -79,6 +79,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 a {
@@ -625,6 +626,7 @@ footer h3, footer p {
 
 .section {
     margin-bottom: 50px;
+    margin-top: 20px;
 }
 
 .section-title {
@@ -689,7 +691,7 @@ footer h3, footer p {
 
 /*MARK: contact*/
 /* БЛОК С КОНТАКТАМИ */
-.contact-info {
+.contact-info-contact {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -727,8 +729,8 @@ footer h3, footer p {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding: 30px 20px 40px;
+    width: 100%;
 }
 
 .feedback-title {
@@ -1733,6 +1735,7 @@ footer h3, footer p {
 
 .hero {
     padding: 30px 0;
+    width: 100%;
 }
 
 .hero-content {
@@ -1743,7 +1746,6 @@ footer h3, footer p {
 }
 
 .hero-slider {
-    width: 950px;
     overflow: hidden;
 }
 
@@ -1755,7 +1757,7 @@ footer h3, footer p {
 
 .hero-card {
     min-width: 300px;
-    width: 300px;
+    width: 460px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1764,7 +1766,7 @@ footer h3, footer p {
 
 .hero-card img {
     width: 100%;
-    height: 180px;
+    height: 250px;
     object-fit: cover;
     border-radius: 12px;
     margin-bottom: 10px;
@@ -1834,6 +1836,7 @@ footer h3, footer p {
 .about {
     background-color: #0084FF;
     padding: 50px 0 60px;
+    width: 100%;
 }
 
 .about-text {
@@ -1966,6 +1969,7 @@ footer h3, footer p {
 .reviews-section {
     background-color: #0084FF;
     padding: 50px 0 60px;
+    width: 100%;
 }
 
 .reviews {
