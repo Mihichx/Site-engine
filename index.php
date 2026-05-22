@@ -12,13 +12,10 @@
     include './template/layout.php';
     $layout = ob_get_clean();
 
-    $row = getPageBySlug($pdo, 'header');
-    $header = $row['content'] ?? '';
-
     
     // Определяем основной раздел (проверка на пустой params[0])
     $current_section = $params[0] ?? '';
-    if ($current_section == '') {
+    if ($current_section == '' || $current_section == 'index.php') {
         $slug = 'index';
         include './scripts/page.php';
     } elseif ($current_section == 'catalog') {
@@ -50,6 +47,11 @@
     }
 
     // Шапка
+    if ($current_section != 'admin') {
+        $row = getPageBySlug($pdo, 'header');
+        $header = $row['content'];
+    }
+
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $menu_html = '<ul class="center row">';
     foreach ($rows as $row) {

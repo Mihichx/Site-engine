@@ -1,6 +1,7 @@
 <? 
     $page = getPageBySlug($pdo, 'reviews');
     $title = $page['title'];
+    $header_content = $page['header_content'];
     $content = '';
 
     $stmt = $pdo->query("SELECT * FROM reviews WHERE status = 1 ORDER BY date DESC LIMIT 3");

@@ -145,16 +145,5 @@
         $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
         $stmt->execute([':id' => (int)$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC); // Возвращает сразу один массив товара или false
-    }
-
-    // function product($pdo, $name) {
-    //     $stmt = $pdo->prepare("SELECT * FROM products WHERE name = :name");
-    //     $stmt->execute([':name' => $name]);
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
-
-    // function products($pdo) {
-    //     $stmt = $pdo->query("SELECT * FROM products");
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }       
+    }     
 ?>

@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const orderButton = document.querySelector('.btn-order');
+    if (!orderButton) return;
     const paymentButtons = document.querySelectorAll('.payment-card');
     const selectedPaymentInput = document.getElementById('selectedPayment');
-    const orderButton = document.querySelector('.btn-order');
 
     // Запоминаем исходную цену, которая пришла из PHP шаблона (вырезаем только цифры)
     const basePrice = parseInt(orderButton.textContent.replace(/[^0-9]/g, ''));

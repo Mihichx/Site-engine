@@ -1,4 +1,4 @@
-/*MARK: Основные стили
+﻿/*MARK: Основные стили
 */
 .hover:hover {
     opacity: 0.7;
@@ -111,14 +111,6 @@ nav {
     text-align: center;
 }
 
-.admin-button {
-    width: 80px;
-    height: 30px;
-    border: 2px solid #000000;
-    border-radius: 86px;
-}
-
-
 header, footer {        
     width: 100%;
 }
@@ -154,6 +146,77 @@ footer h3, footer p {
 
 
 /* MARK: О нас */
+
+/* Блок разработчика */
+.dev-card {
+    max-width: 900px;
+    margin: 20px auto;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 32px;
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+    padding: 28px 32px;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    transition: transform 0.2s ease;
+}
+
+.dev-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 3px solid #0084FF;
+    padding-bottom: 16px;
+}
+
+.dev-name {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1a2a6c, #0084FF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.dev-badge {
+    margin-left: auto;
+    background: #eef2ff;
+    padding: 4px 12px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0084FF;
+}
+
+.dev-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.dev-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: #ffffffd9;
+    border-radius: 24px;
+    padding: 12px 18px;
+    transition: all 0.2s;
+    border: 1px solid #eef2ff;
+}
+
+.dev-footer {
+    margin-top: 24px;
+    padding-top: 12px;
+    text-align: right;
+    font-size: 13px;
+    color: #6c86a3;
+    border-top: 1px dashed #cbdff2;
+}
+
 .container-about{
     max-width: 1920px;
     margin: 0 auto;
@@ -2786,8 +2849,66 @@ footer h3, footer p {
     }
 }
 
-.admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-.admin-table th, .admin-table td { padding: 8px 12px; border: 1px solid #d3d3d3; text-align: left; font-size: 14px; }
-.admin-table th { background: #e8e8e8; color: #444; font-weight: bold; }
-.admin-table tr:nth-child(even) { background: #fdfdfd; }
-.admin-table tr:hover { background: #f0f4f8; }
+/* --- Таблицы --- */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+.admin-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* --- Кнопки --- */
+.admin-button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 13px;
+    display: inline-block;
+    transition: opacity 0.2s;
+}
+.admin-button:hover { opacity: 0.8; }
+.btn-green { background: #28a745; color: white; }
+.btn-gray { background: #6c757d; color: white; }
+.btn-yellow { background: #ffc107; color: #212529; }
+.btn-red { background: #dc3545; color: white; }
+.btn-blue { background: #007bff; color: white; width: 100%; padding: 10px; font-size: 15px; }
+
+/* --- Модальное окно --- */
+.admin-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.admin-modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 5px;
+    width: 380px;
+    position: relative;
+}
+.close-btn {
+    position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer;
+}
+
+/* --- Формы и элементы --- */
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; margin-bottom: 4px; font-weight: bold; }
+.form-control { width: 100%; padding: 8px; border: 1px solid #ccc; box-sizing: border-box; border-radius: 4px; }
+.admin-error-msg { color: #721c24; background: #f8d7da; padding: 10px; margin-bottom: 15px; border-left: 4px solid #f5c6cb; font-weight: bold; border-radius: 3px; }
+.status-active { color: #28a745; font-weight: bold; }
+.status-hidden { color: #6c757d; }
+.system-locked { color: #999; font-size: 12px; font-style: italic; }

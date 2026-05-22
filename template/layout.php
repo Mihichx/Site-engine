@@ -9,6 +9,7 @@
 		<script src="/js/basket.js"></script>
 		<script src="/js/order.js"></script>
 		<script src="/js/slider.js"></script>
+		<script defer src="/js/admin.js"></script>
 	</head>
 	<body>
 		<header class="center column">

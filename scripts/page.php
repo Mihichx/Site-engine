@@ -2,7 +2,7 @@
     $page = getPageBySlug($pdo, $slug);          
 
     // Формирование статичной страницы 
-    if ($page && $page['in_menu'] === 1 || ($page['in_menu'] === 2 && $params[0] == 'admin') || $slug === 'index') {
+    if ($page && $page['in_menu'] === 1 || ($page['in_menu'] === 2 && $params[0] == 'admin') || $slug === 'index' || $slug === 'team') {
         $title = $page['title'];
         $header_content = $page['header_content'];
         $content = $page['content'];
@@ -25,7 +25,7 @@
 
         if (!empty($name) && !empty($email) && !empty($text)) {
             addFeedback($pdo, $name, $email, $text);
-            $response = ['status' => "Мы с вами свяжемся", 'color' => "green"];
+            $response = ['status' => "Мы учтём ваши пожелания", 'color' => "white"];
         } else {
             $response['status'] = "Заполните все поля!";
         }
@@ -38,7 +38,7 @@
         }
     }
 
-    // Форма отправки обратной связи
+    // Форма связаться с вами
     if (isset($_POST['contact_you'])) {
         $response = ['status' => '', 'color' => 'red'];
 

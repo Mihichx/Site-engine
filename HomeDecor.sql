@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 22 2026 г., 09:26
--- Версия сервера: 8.0.19
--- Версия PHP: 7.1.33
+-- Время создания: Май 22 2026 г., 17:28
+-- Версия сервера: 8.0.30
+-- Версия PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `homedecor`
+-- База данных: `HomeDecor`
 --
 
 -- --------------------------------------------------------
@@ -65,6 +65,13 @@ CREATE TABLE `contact_you` (
   `number` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Дамп данных таблицы `contact_you`
+--
+
+INSERT INTO `contact_you` (`id`, `name`, `email`, `number`) VALUES
+(2, 'Лиза', 'liza777px@gmail.com', '79120076556');
+
 -- --------------------------------------------------------
 
 --
@@ -77,6 +84,13 @@ CREATE TABLE `feedback` (
   `email` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `name`, `email`, `text`) VALUES
+(2, 'Максим', 'max@gmail.com', 'Предлагаю вам открыться в Москве !');
 
 -- --------------------------------------------------------
 
@@ -98,6 +112,14 @@ CREATE TABLE `orders` (
   `created_at` datetime NOT NULL,
   `status` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'process'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `city`, `phone`, `address`, `postal_code`, `notes`, `payment_method`, `total_price`, `products_json`, `created_at`, `status`) VALUES
+(18, 6, 'Ижевск', '+79328539301', 'ул. Ленина, дом 4, кв. 20', '49223', '', 'cash', 5790, '[{\"id\":1,\"name\":\"Ваза из прозрачного стекла 15 см\",\"image\":\"img\\/vase1.jpg\",\"price\":810,\"quantity\":1,\"sum\":810},{\"id\":2,\"name\":\"Ваза из прозрачного стекла 11 см\",\"image\":\"img\\/vase2.jpg\",\"price\":1180,\"quantity\":1,\"sum\":1180},{\"id\":3,\"name\":\"Ваза из прозрачного стекла 24 см\",\"image\":\"img\\/vase3.jpg\",\"price\":3800,\"quantity\":1,\"sum\":3800}]', '2026-05-22 17:19:00', 'new'),
+(19, 9, 'Ижевск', '+79228729036', 'ул. Удмуртская, дом 22, кв. 2', '48953', 'Быстрее', 'cod', 6836, '[{\"id\":11,\"name\":\"Свеча в стекле «Сакура с клубникой»\",\"image\":\"img\\/candle2.jpg\",\"price\":1230,\"quantity\":1,\"sum\":1230},{\"id\":10,\"name\":\"Свеча «Лавандовый вечер»\",\"image\":\"img\\/candle1.jpg\",\"price\":790,\"quantity\":1,\"sum\":790},{\"id\":12,\"name\":\"Свеча «Снежная сказка»\",\"image\":\"img\\/candle3.jpg\",\"price\":1000,\"quantity\":1,\"sum\":1000},{\"id\":17,\"name\":\"Настольное зеркало «Ажур»\",\"image\":\"img\\/mirror2.jpg\",\"price\":3490,\"quantity\":1,\"sum\":3490}]', '2026-05-22 17:21:11', 'new');
 
 -- --------------------------------------------------------
 
@@ -121,10 +143,10 @@ CREATE TABLE `pages` (
 INSERT INTO `pages` (`id`, `slug`, `title`, `content`, `header_content`, `in_menu`) VALUES
 (1, 'index', 'Главная', '<section class=\"hero\">\r\n\r\n        <div class=\"hero-content\">\r\n            <button class=\"hero-arrow hero-prev\" type=\"button\">&#10094;</button>\r\n\r\n            <div class=\"hero-slider\">\r\n                <div class=\"hero-cards\">\r\n\r\n                    <div class=\"hero-card\">\r\n                        <img src=\"/img/banner1.png\" alt=\"Ароматы для дома\">\r\n                        <p>30% на все декоративные подушки и мягкие пледы.</p>\r\n                    </div>\r\n\r\n                    <div class=\"hero-card\">\r\n                        <img src=\"/img/banner2.png\" alt=\"Светильники и гирлянды\">\r\n                        <p>Скидки до 40% на дизайнерские светильники и гирлянды.</p>\r\n                    </div>\r\n\r\n                    <div class=\"hero-card\">\r\n                        <img src=\"/img/banner3.png\" alt=\"Кухонная керамика\">\r\n                        <p>Кухонная керамика и сервировочные доски со скидкой 25%</p>\r\n                    </div>\r\n\r\n                    <div class=\"hero-card\">\r\n                        <img src=\"/img/banner4.png\" alt=\"Вазы и декор\">\r\n                        <p>Новая коллекция ваз и интерьерного декора.</p>\r\n                    </div>\r\n\r\n                    <div class=\"hero-card\">\r\n                        <img src=\"/img/banner5.png\" alt=\"Товары для уюта\">\r\n                        <p>Товары для уюта дома по специальным ценам.</p>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n\r\n            <button class=\"hero-arrow hero-next\" type=\"button\">&#10095;</button>\r\n        </div>\r\n\r\n        <div class=\"hero-dots center\"></div>\r\n    </div>\r\n</section>\r\n\r\n<section class=\"about\">\r\n    <div class=\"content-container\">\r\n\r\n        <h2 class=\"main-title\">О НАС</h2>\r\n\r\n        <p class=\"about-text\">\r\n            «Декор для дома» — это больше, чем магазин. Мы помогаем наполнять пространство теплом,\r\n            уютом и индивидуальностью. Пледы, свечи, вазы, картины — всё, что делает ваш дом особенным.\r\n        </p>\r\n\r\n        <div class=\"about-cards\">\r\n\r\n            <div class=\"about-card\">\r\n                <h3>Качество</h3>\r\n                <p>Только проверенные бренды и ручная работа мастеров</p>\r\n            </div>\r\n\r\n            <div class=\"about-card\">\r\n                <h3>Доставка</h3>\r\n                <p>По всей России за 3–7 дней, бережная упаковка</p>\r\n            </div>\r\n\r\n            <div class=\"about-card\">\r\n                <h3>Гарантия</h3>\r\n                <p>Возврат в течение 30 дней без лишних вопросов</p>\r\n            </div>\r\n\r\n        </div>\r\n\r\n</section>\r\n\r\n<section class=\"products-section\">\r\n    <div class=\"content-container\">\r\n\r\n        <h2 class=\"main-title black-title\">ПОПУЛЯРНЫЕ ТОВАРЫ</h2>\r\n\r\n        <div class=\"products\">\r\n\r\n            <div class=\"product-card\">\r\n                <img src=\"./img/bowl1.jpg\" alt=\"\">\r\n                <div class=\"product-info\">\r\n                    <h3>Салатница<br> «Цветочный вальс»</h3>\r\n                    <p>1 390 ₽</p>\r\n                    <button>Добавить</button>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"product-card\">\r\n                <img src=\"./img/candle1.jpg\" alt=\"\">\r\n                <div class=\"product-info\">\r\n                    <h3>Свеча «Лавандовый вечер»</h3>\r\n                    <p>790 ₽</p>\r\n                    <button>Добавить</button>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"product-card\">\r\n                <img src=\"./img/mirror2.jpg\" alt=\"\">\r\n                <div class=\"product-info\">\r\n                    <h3>Настольное зеркало «Ажур»</h3>\r\n                    <p>3 490 ₽</p>\r\n                    <button>Добавить</button>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"product-card\">\r\n                <img src=\"./img/flower3.jpg\" alt=\"\">\r\n                <div class=\"product-info\">\r\n                    <h3>Цветочная композиция «Свежесть»</h3>\r\n                    <p>4 260 ₽</p>\r\n                    <button>Добавить</button>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"product-card\">\r\n                <img src=\"./img/clock1.jpg\" alt=\"\">\r\n                <div class=\"product-info\">\r\n                    <h3>Настенные часы «Утренняя роза»</h3>\r\n                    <p>4 520 ₽</p>\r\n                    <button>Добавить</button>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"product-card\">\r\n                <img src=\"./img/kashpo3.jpg\" alt=\"\">\r\n                <div class=\"product-info\">\r\n                    <h3>Кашпо <br>«Чистый цилиндр»</h3>\r\n                    <p>1 720 ₽</p>\r\n                    <button>Добавить</button>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n    </div>\r\n</section>\r\n\r\n\r\n<section class=\"sale-section\">\r\n    <div class=\"content-container\">\r\n\r\n        <h2 class=\"main-title black-title\">АКЦИИ</h2>\r\n\r\n        <div class=\"sales\">\r\n\r\n            <div class=\"sale-card\">\r\n                <p>Скидка 20% на первый заказ по промокоду WELCOME</p>\r\n            </div>\r\n\r\n            <div class=\"sale-card\">\r\n                <p>Бесплатная доставка от 3 000 ₽</p>\r\n            </div>\r\n\r\n        </div>\r\n\r\n    </div>\r\n</section>\r\n\r\n<section class=\"reviews-section\">\r\n    <div class=\"content-container\">\r\n\r\n        <h2 class=\"main-title\">ОТЗЫВЫ</h2>\r\n\r\n        <div class=\"reviews\">\r\n\r\n            <div class=\"review-card\">\r\n                <span>★★★★★</span>\r\n                <h3>Анна С.</h3>\r\n                <p>\r\n                    Заказывала вазу и свечи — всё пришло целым, упаковано с любовью.\r\n                    Даже бонусный пакетик положили! Теперь только у вас ♥\r\n                </p>\r\n            </div>\r\n\r\n            <div class=\"review-card\">\r\n                <span>★★★★★</span>\r\n                <h3>Екатерина К.</h3>\r\n                <p>\r\n                    «Отличный магазин! Быстрая доставка и плед за 4 дня.\r\n                    Плед купила — очень мягкий, сын не смог с ним расстаться»\r\n                </p>\r\n            </div>\r\n\r\n            <div class=\"review-card\">\r\n                <span>★★★★☆</span>\r\n                <h3>Дмитрий В.</h3>\r\n                <p>\r\n                    «Хороший выбор декора, цены приятные.\r\n                    Единственное — свеча пахла не так ярко, как ожидал.\r\n                    Но в целом доволен.»\r\n                </p>\r\n            </div>\r\n\r\n        </div>\r\n\r\n    </div>\r\n</section>\r\n\r\n<section class=\"home-feedback\">\r\n    <div class=\"content-container\">\r\n\r\n        <h2 class=\"main-title black-title\">СВЯЗАТЬСЯ С ВАМИ</h2>\r\n\r\n        <form class=\"home-feedback-form\">\r\n            <input name=\"rev_name2\" type=\"text\" placeholder=\"Имя\">\r\n            <input name=\"rev_email2\" type=\"email\" placeholder=\"E-mail\">\r\n            <input name=\"rev_number\" type=\"text\" placeholder=\"Телефон\">\r\n            <button name=\"contact_you\" type=\"submit\">Отправить</button>\r\n        </form>\r\n\r\n    </div>\r\n</section>', '<h2>Главная</h2>', 0),
 (3, 'aboutus', 'О нас', '<div class=\"container-about\">\r\n    <!-- Главный блок -->\r\n    <section class=\"heroo-center\">\r\n        <img src=\"img/about1.jpg\" loading=\"lazy\" alt=\"\">\r\n        <div class=\"hero-text\">\r\n            <p>\r\n            Добро пожаловать в «Дом Деталей» — пространство, где декор перестаёт быть просто дополнением, а становится главным инструментом для создания уюта. Мы созданы для тех, кто верит: дом — это отражение внутреннего мира, и каждая деталь в нём имеет значение.\r\n            </p>\r\n        </div>\r\n    </section>\r\n\r\n    <!-- О компании -->\r\n    <section class=\"about_a\">\r\n        <h2>О КОМПАНИИ</h2>\r\n        <div class=\"about-content\">\r\n            <img src=\"img/about2.jpg\" loading=\"lazy\" alt=\"\">\r\n            <p>\r\n            «Дом Деталей» был основан в 2020 году командой дизайнеров и энтузиастов, уставших от безликих решений для интерьера. Мы начали с небольшой мастерской по созданию авторских светильников и керамики, а сегодня — это уютное онлайн-пространство уникального декора, который объединяет сотни мастеров из разных уголков мира.\r\n            </p>\r\n        </div>\r\n    </section>\r\n\r\n    <!-- Миссия -->\r\n    <section class=\"mission\">\r\n        <p class=\"mission-title\">Наша миссия - вдохновлять людей наполнять свои дома смыслом и эстетикой без компромиссов</p>\r\n        <div class=\"mission-content\">\r\n            <div class=\"mission-text\">\r\n                <p>\r\n                    Мы хотим доказать, что декор не обязан быть дорогим, чтобы быть красивым, и не обязан быть сложным, чтобы быть эффектным. Наша задача сделать процесс создания уютного интерьера простым, понятным и доступным для каждого, независимо от бюджета или стиля жизни.\r\n                </p>\r\n            </div>\r\n            <img src=\"img/about3.jpg\" loading=\"lazy\" alt=\"\">\r\n        </div>\r\n    </section>\r\n\r\n    <!-- Преимущества -->\r\n    <section class=\"advantages\">\r\n        <h2>НАШИ ПРЕИМУЩЕСТВА</h2>\r\n        <div class=\"advantages-grid\">\r\n            <div class=\"advantage\">1. Только уникальные вещи — в нашем ассортименте нет масс-маркета.</div>\r\n            <div class=\"advantage\">3. Честная гарантия — вы можете вернуть или обменять товар в течение 30 дней.</div>\r\n            <div class=\"advantage\">2. Экологичный подход — мы отдаём предпочтение натуральным материалам.</div>\r\n            <div class=\"advantage\">4. Быстрая доставка по всей стране — отправляем заказы в течение 24 часов.</div>\r\n        </div>\r\n    </section>\r\n\r\n    <!-- Контакты -->\r\n    <section class=\"contacts\">\r\n        <h2>КОНТАКТЫ</h2>\r\n        <p>Мы всегда на связи и открыты к диалогу — будь то вопрос по заказу, предложение сотрудничества или просто идея для нового декора.</p>\r\n        <div class=\"contact-info\">\r\n            <p>Телефон: +7 (999) 123-45-67 (ежедневно, с 10:00 до 21:00 по МСК)</p>\r\n            <p>Email: hello@dom-detali.ru — по вопросам заказов и возвратов</p>\r\n            <p>Email для партнёров: partners@dom-detali.ru — для художников, мастеров и брендов</p>\r\n        </div>\r\n    </section>\r\n</div>', '<h2>Вдохновение в каждой детали</h2>', 1),
-(4, 'footer', '', '<div class=\"footer center column\">\r\n    <div class=\" center row\">\r\n        <h3>ДЕКОР ДЛЯ <br> ДОМА</h3>\r\n        <img src=\"/img/logo.png\" loading = \"lazy\" alt=\"Логотип\" style=\"max-width: 50px; margin: 20px;\">\r\n    </div>\r\n    <p style=\"opacity: 0.6;\">&copy; {{ year }} Декор для дома. Все права защищены.</p>\r\n    <p style=\"opacity: 0.6; margin-top: 20px;\">\r\n        Команда разработчиков: <br>\r\n        Бакулев Михаил <br>\r\n        Сухарева Ангелина <br>\r\n        Рагазина Елена\r\n    </p>\r\n    <div class=\"center row\" style=\"margin-top: 20px;\">\r\n        <a target=\"_blank\" class=\"hover\" href=\"https://web.telegram.org/\"><img class=\"margin15\" src=\"/img/telegram.png\" loading = \"lazy\" alt=\"telegram\" style=\"max-width: 40px;\"></a>\r\n        <a target=\"_blank\" class=\"hover\" href=\"https://www.youtube.com/\"><img class=\"margin15\" src=\"/img/youtube.png\" loading = \"lazy\" alt=\"youtube\" style=\"max-width: 40px;\"></a>\r\n        <a target=\"_blank\" class=\"hover\" href=\"https://vk.com/\"><img class=\"margin15\" src=\"/img/vk.png\" loading = \"lazy\" alt=\"vk\" style=\"max-width: 40px;\"></a>\r\n    </div>\r\n</div>', '', 0),
+(4, 'footer', '', '<div class=\"footer center column\">\r\n    <div class=\" center row\">\r\n        <h3>ДЕКОР ДЛЯ <br> ДОМА</h3>\r\n        <img src=\"/img/logo.png\" loading = \"lazy\" alt=\"Логотип\" style=\"max-width: 50px; margin: 20px;\">\r\n    </div>\r\n    <p style=\"opacity: 0.6;\">&copy; {{ year }} Декор для дома. Все права защищены.</p>\r\n    <a href=\"/team\" style=\"margin-top: 20px; text-decoration: none; color: white;\" class=\"hover\">\r\n        Команда разработчиков: <br>\r\n        Бакулев Михаил <br>\r\n        Сухарева Ангелина <br>\r\n        Рагазина Елена\r\n    </a>\r\n    <div class=\"center row\" style=\"margin-top: 20px;\">\r\n        <a target=\"_blank\" class=\"hover\" href=\"https://web.telegram.org/\"><img class=\"margin15\" src=\"/img/telegram.png\" loading = \"lazy\" alt=\"telegram\" style=\"max-width: 40px;\"></a>\r\n        <a target=\"_blank\" class=\"hover\" href=\"https://www.youtube.com/\"><img class=\"margin15\" src=\"/img/youtube.png\" loading = \"lazy\" alt=\"youtube\" style=\"max-width: 40px;\"></a>\r\n        <a target=\"_blank\" class=\"hover\" href=\"https://vk.com/\"><img class=\"margin15\" src=\"/img/vk.png\" loading = \"lazy\" alt=\"vk\" style=\"max-width: 40px;\"></a>\r\n    </div>\r\n</div>', '', 0),
 (5, 'catalog', 'Каталог', '<div class=\"category-item\">\r\n    <a href=\"/catalog/{{ href }}\"><img src=\"{{ image }}\" loading=\"lazy\" alt=\"{{ name }}\">{{ name }}</a>\r\n</div>', '<form method=\"POST\" data-no-ajax>\r\n    <div class=\"center\" style=\"-webkit-mask-image: -webkit-radial-gradient(white, black); align-items: center; width: 700px; height: 55px; background: white; border: 2px solid #CFCFCF; border-radius: 25rem; padding: 0 20px; overflow: hidden;\">\r\n        <input type=\"text\" placeholder=\"Поиск по товарам...\" style=\"flex: 1; border: none; outline: none; font-size: 18px; background: transparent; height: 55px;\" name=\"search\">\r\n        <button class=\"hover\" type=\"submit\" style=\"background: none; border: none;\"><img src=\"/img/search.svg\" loading=\"lazy\" alt=\"Поиск\" style=\"width: 30px; cursor: pointer;\"></button>\r\n    </div>\r\n</form>', 1),
 (6, 'header', '', '<nav class=\"center row\">\r\n    {{ menu }}\r\n</nav>\r\n<div class=\"header-content center row space-between\">\r\n    <div class=\"margin-left80\" style=\"width: 211px;\">\r\n        <a class=\"hover center row\" href=\"/index\">\r\n            <h3>ДЕКОР ДЛЯ <br> ДОМА</h3>\r\n            <img src=\"/img/logo.png\" alt=\"Логотип\" style=\"max-width: 50px; margin: 20px;\">\r\n        </a>\r\n    </div>\r\n    \r\n    {{ header_content }}\r\n\r\n    <div class=\"center row margin-right80\" style=\"width: 211px;\">\r\n        <a class=\"{{ basket_class }}\" href=\"/basket\">\r\n            <img class=\"margin15\" src=\"{{ basket_img }}\" alt=\"Корзина\" style=\"max-width: 40px;\">\r\n        </a>\r\n        \r\n        <a class=\"{{ profile_class }}\" href=\"/profile\">\r\n            {{ profile }} \r\n        </a>\r\n    </div>\r\n</div>', '', 0),
-(9, 'admin', 'Админпанель', '<div class=\'center column\'>\r\n    <h1 class=\'margin15\'>Админ-панель</h1>\r\n    <form class=\'center margin15 column\' method=\'POST\' data-no-ajax>\r\n        <input class=\'margin5 admin-input\' type=\'login\' name=\'login\' placeholder=\'Логин\' required>\r\n        <input class=\'margin5 admin-input\' type=\'password\' name=\'password\' placeholder=\'Пароль\' required>\r\n        <button class=\'margin5 admin-button hover\' type=\'submit\' name=\'action\'>Вход</button>\r\n    </form>\r\n</div>', '<nav class=\"center row\">\r\n    {{ menu }}\r\n</nav>\r\n<div class=\"header-content center \">\r\n        <a class=\"hover center row\" href=\"/admin\">\r\n            <h3>АДМИН ДЛЯ <br> ДОМА</h3>\r\n            <img src=\"/img/logo.png\" loading = \"lazy\" alt=\"Логотип\" style=\"max-width: 50px; margin: 20px;\">\r\n        </a>\r\n</div>', 2),
+(9, 'admin', 'Админпанель', '<div class=\'center column\'>\r\n    <h1 class=\'margin15\'>Админ-панель</h1>\r\n    <form class=\'center margin15 column\' method=\'POST\'>\r\n        <input class=\'margin5 admin-input\' type=\'login\' name=\'login\' placeholder=\'Логин\' required>\r\n        <input class=\'margin5 admin-input\' type=\'password\' name=\'password\' placeholder=\'Пароль\' required>\r\n        <button class=\'margin5 admin-button hover\' type=\'submit\' name=\'action\'>Вход</button>\r\n    </form>\r\n</div>', '<nav class=\"center row\">\r\n    {{ menu }}\r\n</nav>\r\n<div class=\"header-content center \">\r\n        <a class=\"hover center row\" href=\"/admin\">\r\n            <h3>АДМИН ДЛЯ <br> ДОМА</h3>\r\n            <img src=\"/img/logo.png\" loading = \"lazy\" alt=\"Логотип\" style=\"max-width: 50px; margin: 20px;\">\r\n        </a>\r\n</div>', 2),
 (10, 'reviews', 'Отзывы', '<div class=\"container-reviews\">\r\n    <section class=\"top-text\">\r\n        <p>Делитесь впечатлениями и читайте, что думают другие о магазине «Дом Деталей»!</p>\r\n    </section>\r\n\r\n    <!-- Отзывы -->\r\n    <section class=\"review\">\r\n        {{ reviews }}\r\n    </section>\r\n\r\n    <section class=\"form-section center column\">\r\n        <h2>Оставить свой отзыв</h2>\r\n        <form class=\"review-form center column\">\r\n            <input type=\"text\" name=\"rev_name\" placeholder=\"Имя\" value=\"{{ login }}\" readonly>\r\n            <select name=\"rev_rating\">\r\n                <option value=\"5\">★★★★★</option>\r\n                <option value=\"4\">★★★★</option>\r\n                <option value=\"3\">★★★</option>\r\n                <option value=\"2\">★★</option>\r\n                <option value=\"1\">★</option>\r\n            </select>\r\n            <textarea name=\"rev_text\" placeholder=\"Ваш отзыв\"></textarea>\r\n            <button type=\"submit\" name=\"send_review\">Отправить</button>\r\n        </form>\r\n    </section>\r\n</div>', '<h2>Отзывы наших покупателей</h2>', 1),
 (11, 'сontacts', 'Контакты', '<section class=\"contact-info-contact\">\r\n\r\n<div class=\"contact-text\">\r\n    <p>\r\n        Наполните дом уютом в любое удобное время — наш сайт открыт для заказов 24/7.\r\n        Если вам нужна помощь в выборе декора или возникли вопросы по заказу,\r\n        мы всегда связи! Позвоните на горячую линию или напишите на электронную почту.\r\n        Также вы можете оставить заявку через форму обратной связи, и наш менеджер\r\n        перезвонит вам в ближайшее время.\r\n    </p>\r\n</div>\r\n\r\n<div class=\"contact-items\">\r\n\r\n    <div class=\"contact-item\">\r\n        <p>hello@dom-detali.ru</p>\r\n    </div>\r\n\r\n    <div class=\"contact-item\">\r\n        <p>+7 947 485 98 87</p>\r\n    </div>\r\n\r\n    <div class=\"contact-item\">\r\n        <p>+7 947 485 98 87</p>\r\n    </div>\r\n\r\n</div>\r\n\r\n</section>\r\n\r\n\r\n<section class=\"feedback\">\r\n\r\n<h2 class=\"feedback-title\">Обратная связь</h2>\r\n\r\n<form class=\"feedback-form\">\r\n    <input name=\"rev_name1\" type=\"text\" placeholder=\"Ваше имя\">\r\n    <input name=\"rev_email\" type=\"email\" placeholder=\"Ваш email\">\r\n    <textarea name=\"rev_text1\" placeholder=\"Ваше сообщение\"></textarea>\r\n    <button type=\"submit\" name=\"send_feedback\">Отправить</button>\r\n</form>\r\n\r\n</section>\r\n\r\n\r\n<section class=\"location\">\r\n\r\n<div class=\"location-content\">\r\n\r\n    <div class=\"location-text\">\r\n        <h2>Где нас найти:</h2>\r\n\r\n        <p>ул. Пушкинская, 270</p>\r\n        <p>ул. Холмогорова, 11</p>\r\n        <p>ул. Баранова, 55</p>\r\n    </div>\r\n\r\n    <div class=\"location-map\">\r\n        <iframe src=\"https://yandex.ru/map-widget/v1/?um=constructor%3A484fa3e7973acd9e3382ddfbfacd8592c0ea7df9aab1e1cd44dc8a9c4f8bce83&amp;source=constructor\" frameborder=\"0\"></iframe>\r\n    </div>\r\n\r\n</div>\r\n\r\n</section>', '<h2>Свяжитесь с нами!</h2>', 1),
 (12, 'stock', 'Акции', '<div class=\"content-container\">\r\n\r\n<section class=\"section\">\r\n    <h2 class=\"section-title\">Скидки</h2>\r\n\r\n    <div class=\"cards\">\r\n        {{ sales }}\r\n    </div>\r\n</section>\r\n\r\n<section class=\"section\">\r\n    <h2 class=\"section-title\">Специальные предложения</h2>\r\n\r\n    <div class=\"cards\">\r\n        {{ special }}\r\n    </div>\r\n</section>\r\n\r\n</div>', '<h2>Найди своё</h2>', 1),
@@ -144,7 +166,8 @@ INSERT INTO `pages` (`id`, `slug`, `title`, `content`, `header_content`, `in_men
 (30, 'card_review', '', '<div class=\"reviews-card\">\r\n    <div class=\"review-content\">\r\n        <div class=\"review-top\">\r\n            <span class=\"stars\">{{ stars }}</span>\r\n            <span class=\"date\">{{ date }}</span>\r\n        </div>\r\n        <h3>{{ name }}</h3>\r\n        <p>«{{ description }}»</p>\r\n    </div>\r\n</div>', '', 0),
 (31, 'pages', 'Страницы', '', '', 2),
 (32, 'stock1', 'Акции', '', '', 2),
-(33, 'order1', 'Заказы', '', '', 2);
+(33, 'order1', 'Заказы', '', '', 2),
+(34, 'team', 'Наша команда', '<div class=\"dev-card\">\r\n				<div class=\"dev-header\">\r\n					<h2 class=\"dev-name\">Бакулев Михаил</h2>\r\n					<span class=\"dev-badge\">Full‑stack разработчик</span>\r\n				</div>\r\n				<ul class=\"dev-list\">\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Динамическая маршрутизация</strong> на PHP, шаблонизация страниц через базу данных (таблица pages).</span>\r\n					</li>\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Авторизация и регистрация</strong> с хешированием паролей (password_hash/verify), разграничение ролей (пользователь, модератор, администратор).</span>\r\n					</li>\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Корзина товаров</strong> на сессиях + AJAX (добавление/удаление, изменение количества, промокоды с динамическим пересчётом).</span>\r\n					</li>\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Административная панель</strong> с CRUD для товаров, пользователей, отзывов, страниц, акций и заказов; модерация отзывов.</span>\r\n					</li>\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Оформление заказа</strong> с выбором способа оплаты (наценка 5% при наложенном платеже), сохранением в БД и очисткой корзины.</span>\r\n					</li>\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Поиск, сортировка и фильтрация</strong> товаров по категориям, оптимизация БД (индексы на slug, login, name).</span>\r\n					</li>\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Отзывы с премодерацией</strong>: отправка через AJAX только авторизованными, отображение после одобрения модератором.</span>\r\n					</li>\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Проектирование БД</strong> (таблицы products, users, orders, reviews, pages, stock, contact) и ежедневные коммиты в GitHub.</span>\r\n					</li>\r\n				</ul>\r\n				<div class=\"dev-footer\">\r\n					Стек: HTML, CSS, JavaScript (AJAX/Fetch), PHP, MySQL • GitHub-репозиторий с ежедневными коммитами\r\n				</div>\r\n			</div>\r\n\r\n			<div class=\"dev-card\">\r\n				<div class=\"dev-header\">\r\n					<h2 class=\"dev-name\">Вы</h2>\r\n					<span class=\"dev-badge\">какой разработчик</span>\r\n				</div>\r\n				<ul class=\"dev-list\">\r\n					<li class=\"dev-list-item\">\r\n						<span><strong>Ваш</strong> текст.</span>\r\n					</li>\r\n				</ul>\r\n				<div class=\"dev-footer\">\r\n					Стек: ваш\r\n				</div>\r\n			</div>', '<h2>Мы крутые !</h2>', 0);
 
 -- --------------------------------------------------------
 
@@ -238,19 +261,9 @@ CREATE TABLE `reviews` (
 INSERT INTO `reviews` (`id`, `name`, `rating`, `text`, `status`, `date`) VALUES
 (27, 'Анна', '5', 'Заказывала вазу и свечи — всё пришло целым, упаковано с любовью. Даже бонусный магнитик положили! Теперь только к вам.', 1, '2026-05-19 15:08:55'),
 (28, 'Екатерина', '5', 'Отличный магазин! Быстрая доставка в Ижевск за 4 дня. Плед купила — очень мягкий, как на фото. Спасибо!', 1, '2026-05-19 15:09:22'),
-(29, 'Дмитрий', '4', 'Хороший выбор декора, цены приятные. Единственное — свеча пахла не так ярко, как ожидала. Но в целом довольна.', 1, '2026-05-19 15:09:45');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `settings`
---
-
-CREATE TABLE `settings` (
-  `id` int NOT NULL,
-  `key_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(29, 'Дмитрий', '4', 'Хороший выбор декора, цены приятные. Единственное — свеча пахла не так ярко, как ожидала. Но в целом довольна.', 1, '2026-05-19 15:09:45'),
+(33, 'Михаил', '5', 'Быстрое оформление, мне понравилось', 1, '2026-05-22 17:19:25'),
+(34, 'Миш', '1', 'Долгая заставка ****', 0, '2026-05-22 17:22:07');
 
 -- --------------------------------------------------------
 
@@ -310,7 +323,7 @@ INSERT INTO `users` (`id`, `login`, `email`, `password`, `role`, `date_regist`) 
 (22, 'Анна', 'anna@gmail.com', '$2y$10$qN0NY.s0BR5uZzpJn9SgiegnIGmXtiaJoBNiD83NmETdhL/B6Jara', 'user', '2026-05-19'),
 (23, 'Екатерина', 'ekaterina@gmail.com', '$2y$10$RQYTq.Eh7iQJKYtfCuefnuKanHJnCAnI1RO3oWXU.bUAmyDOmezdC', 'user', '2026-05-19'),
 (24, 'Дмитрий', 'dmitri@gmail.com', '$2y$10$D48gRN4v1.cqvfJO0SnqAOkw0BCU99PQLQWr6AICgQndQ2kQAKKqK', 'user', '2026-05-19'),
-(25, 'df', 'suharevaangelina4@gmail.com', '$2y$10$K5iYyIVaXY5flYGMsG9Sf.9tPw1ZdnONgx3pcuB.DbrhPicl/fjpy', 'admin', '2026-05-19');
+(25, 'Ангелина', 'suharevaangelina4@gmail.com', '$2y$10$K5iYyIVaXY5flYGMsG9Sf.9tPw1ZdnONgx3pcuB.DbrhPicl/fjpy', 'admin', '2026-05-19');
 
 --
 -- Индексы сохранённых таблиц
@@ -363,12 +376,6 @@ ALTER TABLE `reviews`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `settings`
---
-ALTER TABLE `settings`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `stock`
 --
 ALTER TABLE `stock`
@@ -395,43 +402,37 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `contact_you`
 --
 ALTER TABLE `contact_you`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT для таблицы `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT для таблицы `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- AUTO_INCREMENT для таблицы `settings`
---
-ALTER TABLE `settings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT для таблицы `stock`

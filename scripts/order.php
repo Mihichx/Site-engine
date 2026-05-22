@@ -93,7 +93,7 @@
             unset($_SESSION['discount_multiplier']);
             unset($_SESSION['user']['final_price']);
 
-           echo json_encode(['redirect' => '/profile']);
+            echo json_encode(['redirect' => '/profile']);
             exit;
         } else {
             echo json_encode(['status' => 'Ошибка базы данных. Попробуйте позже.', 'color' => 'red']);

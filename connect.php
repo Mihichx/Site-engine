@@ -1,5 +1,5 @@
 <?
-    // ini_set('display_errors', 0);  // Отключаем стандартный вывод ошибок PHP в браузер
+    ini_set('display_errors', 0);  // Отключаем стандартный вывод ошибок PHP в браузер
 
     $host = 'localhost';
     $user = 'root';
