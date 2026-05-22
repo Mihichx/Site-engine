@@ -71,7 +71,7 @@
 
                 echo json_encode([
                     'status' => 'Добавлено',
-                    'color' => 'black'
+                    'color' => 'white'
                 ]);
             } else {
                 echo json_encode([

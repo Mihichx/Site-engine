@@ -15,9 +15,8 @@
     
     // Определяем основной раздел (проверка на пустой params[0])
     $current_section = $params[0] ?? '';
-    if ($current_section == '' || $current_section == 'index.php') {
-        $slug = 'index';
-        include './scripts/page.php';
+    if ($current_section == '' || $current_section == 'index.php' || $current_section == 'index') {
+        include './scripts/index.php';
     } elseif ($current_section == 'catalog') {
         include './scripts/catalog.php';
     } elseif ($current_section == 'admin') {

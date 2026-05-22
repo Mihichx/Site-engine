@@ -1,6 +1,7 @@
 <?php 
     $page = getPageBySlug($pdo, 'basket');
     $title = $page['title'];
+    $header_content = "<h2>Корзина</h2>";
 
     if (isset($_SESSION['user']['login'])) {
         

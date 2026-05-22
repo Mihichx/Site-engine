@@ -16,6 +16,7 @@
 
     $page = getPageBySlug($pdo, 'order');
     $title = $page['title'];
+    $header_content = $page['header_content'];
 
     // Если корзина в сессии пустая — прерываем выполнение для GET-запроса
     $basket = $_SESSION['user']['basket'] ?? [];

@@ -83,6 +83,7 @@
 
     $page = getPageBySlug($pdo, 'profile');
     $title = $page['title'] ?? 'Профиль';
+    $header_content = $page['header_content'];
 
     if (!function_exists('hd_e')) {
         function hd_e($value) {
