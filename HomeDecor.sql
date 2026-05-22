@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 22 2026 г., 09:26
+-- Время создания: Май 22 2026 г., 17:04
 -- Версия сервера: 8.0.19
 -- Версия PHP: 7.1.33
 
@@ -60,10 +60,18 @@ INSERT INTO `category` (`id`, `name`, `image`, `href`) VALUES
 
 CREATE TABLE `contact_you` (
   `id` int NOT NULL,
-  `name` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `number` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `number` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `contact_you`
+--
+
+INSERT INTO `contact_you` (`id`, `name`, `email`, `number`) VALUES
+(1, 'ghfg', 'suharevaangelina4@gmail.com', '4534534'),
+(2, 'пывы', 'suharevaangelina4@gmail.xn--com-rfd', '23');
 
 -- --------------------------------------------------------
 
@@ -158,7 +166,7 @@ CREATE TABLE `products` (
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` int NOT NULL,
   `image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `more_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `material` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -214,7 +222,13 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `price`, `image`, `descript
 (39, 11, 'Тарелка «Голубая мечта»', 2160, 'img/plate3.jpg', 'Тарелка с градиентом от голубого к белому.', 'Современный дизайн, подойдёт для подачи завтрака или лёгких блюд. Градиент придаёт изделию лёгкость и воздушность.', 'стекло', 'голубой гр', '21', '21', '2', '0.6'),
 (40, 12, 'Конфетница «Золотой сад»', 20170, 'img/bonbonniere1.jpg', 'Роскошная конфетница с позолоченными элементами.', 'Премиальный сегмент — для сервировки сладостей на торжественных мероприятиях. Объём позволяет разместить большое количество конфет.', 'фарфор, по', 'белый', '25', '30', '15', '3'),
 (41, 12, 'Конфетница «Триумф золота»', 18200, 'img/bonbonniere2.jpg', 'Элегантная конфетница с золотыми вставками.', 'Подходит для сервировки конфет, орехов или сухофруктов. Узор выполнен с высокой точностью. Устойчивая основа предотвращает опрокидывание.', 'фарфор', 'белый', '24', '28', '14', '2.8'),
-(42, 12, 'Конфетница «Венок природы»', 17140, 'img/bonbonniere3.jpg', 'Конфетница с рельефным венком из листьев.', 'Универсальный дизайн — подойдёт как для сервировки, так и для декора. Рельеф придаёт изделию текстуру и объём.', 'керамика', 'кремовый', '23', '27', '13', '2.5');
+(42, 12, 'Конфетница «Венок природы»', 17140, 'img/bonbonniere3.jpg', 'Конфетница с рельефным венком из листьев.', 'Универсальный дизайн — подойдёт как для сервировки, так и для декора. Рельеф придаёт изделию текстуру и объём.', 'керамика', 'кремовый', '23', '27', '13', '2.5'),
+(43, 2, 'Свеча «Карамельный латте»', 890, 'img/candle4.jpg', 'Ароматическая свеча с теплым кофейно-карамельным ароматом.', 'Создаёт уютную атмосферу и наполняет помещение мягким сладким ароматом. Отлично подходит для осеннего и зимнего декора.', 'воск', 'бежевый', '10', '7', '7', '0.22'),
+(44, 2, 'Свеча в банке «Морской бриз»', 1150, 'img/candle5.jpg', 'Освежающая ароматическая свеча с морскими нотами.', 'Стильная свеча в стеклянной банке с длительным временем горения. Идеально подходит для ванной комнаты и зоны отдыха.', 'воск', 'голубой', '11', '8', '8', '0.28'),
+(45, 2, 'Свеча «Шоколадный десерт»', 970, 'img/candle6.jpg', 'Ароматическая свеча с насыщенным шоколадным ароматом.', 'Создаёт атмосферу тепла и комфорта. Подходит для подарка и украшения интерьера.', 'воск', 'коричневый', '9', '7', '7', '0.21'),
+(46, 3, 'Хрустальная салатница «Империал»', 2100, 'img/bowl4.jpg', 'Классическая хрустальная чаша с резными гранями.', 'Идеально преломляет свет, создавая праздничную атмосферу за столом.', 'хрусталь', 'прозрачный', '12', '22', '22', '1.2'),
+(47, 3, 'Деревянная салатница «Эко»', 1450, 'img/bowl5.jpg', 'Салатница из натурального дуба ручной работы.', 'Покрыта безопасным маслом. Не использовать в микроволновке.', 'дерево', 'коричневый', '10', '24', '24', '0.6'),
+(48, 3, 'Салатница «Черный мрамор»', 1850, 'img/bowl6.jpg', 'Стильная пиала из прочного матового стекла.', 'Трендовая текстура камня подойдет для современной кухни.', 'стекло', 'черный', '11', '21', '21', '0.85');
 
 -- --------------------------------------------------------
 
@@ -395,7 +409,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `contact_you`
 --
 ALTER TABLE `contact_you`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
@@ -419,7 +433,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT для таблицы `reviews`
