@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 22 2026 г., 21:30
+-- Время создания: Май 23 2026 г., 07:18
 -- Версия сервера: 8.0.30
--- Версия PHP: 7.2.34
+-- Версия PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -70,7 +70,8 @@ CREATE TABLE `contact_you` (
 --
 
 INSERT INTO `contact_you` (`id`, `name`, `email`, `number`) VALUES
-(2, 'Лиза', 'liza777px@gmail.com', '79120076556');
+(2, 'Лиза', 'liza777px@gmail.com', '79120076556'),
+(3, 'фывфыв', 'misha777px@gmail.com', 'asdasd');
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,7 @@ INSERT INTO `pages` (`id`, `slug`, `title`, `content`, `header_content`, `in_men
 (31, 'pages', 'Страницы', '', '', 2),
 (32, 'stock1', 'Акции', '', '', 2),
 (33, 'order1', 'Заказы', '', '', 2),
-(34, 'team', 'Наша команда', '<div class=\"dev-card\">\n    <div class=\"dev-header\">\n        <h2 class=\"dev-name\">Бакулев Михаил</h2>\n        <span class=\"dev-badge\">Full‑stack разработчик</span>\n    </div>\n    <ul class=\"dev-list\">\n        <li class=\"dev-list-item\">\n            <span><strong>Динамическая маршрутизация</strong> на PHP, шаблонизация страниц через базу данных (таблица pages).</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Авторизация и регистрация</strong> с хешированием паролей (password_hash/verify), разграничение ролей (пользователь, модератор, администратор).</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Корзина товаров</strong> на сессиях + AJAX (добавление/удаление, изменение количества, промокоды с динамическим пересчётом).</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Административная панель</strong> с CRUD для товаров, пользователей, отзывов, страниц, акций и заказов; модерация отзывов.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Оформление заказа</strong> с выбором способа оплаты (наценка 5% при наложенном платеже), сохранением в БД и очисткой корзины.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Поиск, сортировка и фильтрация</strong> товаров по категориям, оптимизация БД (индексы на slug, login, name).</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Отзывы с премодерацией</strong>: отправка через AJAX только авторизованными, отображение после одобрения модератором.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Проектирование БД</strong> (таблицы products, users, orders, reviews, pages, stock, contact) и ежедневные коммиты в GitHub.</span>\n        </li>\n    </ul>\n    <div class=\"dev-footer\">\n        Стек: Figma, HTML, CSS, JavaScript (AJAX/Fetch), PHP, MySQL • GitHub-репозиторий с ежедневными коммитами\n    </div>\n</div>\n\n<div class=\"dev-card\">\n    <div class=\"dev-header\">\n        <h2 class=\"dev-name\">Сухарева Ангелина</h2>\n        <span class=\"dev-badge\">Full-stack разработчик</span>\n    </div>\n    <ul class=\"dev-list\">\n        <li class=\"dev-list-item\">\n            <span><strong>Разработка модуля вывода акций:</strong> написание PHP-скриптов для динамической подстановки данных вместо маркеров на страницах, загружаемых из БД.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Работа с базой данных:</strong> проектирование структуры таблицы для акций, а также наполнение таблиц товаров и акций информацией.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Верстка пользовательских интерфейсов:</strong> создание HTML/CSS-кода для главной страницы, контактов, форм авторизации, личного кабинета и управления профилем.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Оптимизация CSS:</strong> очистка стилей от дублирующего кода и оптимизация файлов для ускорения загрузки страниц.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Разработка визуальных макетов:</strong> проектирование внешнего вида страниц акций, контактов, форм авторизации, личного кабинета и разделов управления профилем.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Тестирование и отладка:</strong> проверка корректности отображения верстки в браузерах и исправление ошибок.</span>\n        </li>\n    </ul>\n    <div class=\"dev-footer\">\n        Стек: Figma, HTML, CSS, PHP, MySQL.\n    </div>\n</div>\n\n<div class=\"dev-card\">\n    <div class=\"dev-header\">\n        <h2 class=\"dev-name\">Рагазина Елена</h2>\n        <span class=\"dev-badge\">Full‑stack разработчик</span>\n    </div>\n    <ul class=\"dev-list\">\n        <li class=\"dev-list-item\">\n            <span><strong>Проектирование макетов</strong> для основных страниц сайта: каталог, категории товаров, детальная страница товара, отзывы, «О нас», корзина и оформление заказа.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>HTML- и CSS-вёрстка</strong> страниц каталога, категорий, отзывов, страницы «О нас», корзины и оформления заказа с учётом общей стилистики интернет-магазина.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Слайдер на главной странице:</strong>Слайдер на главной странице: добавление интерактивного блока с акционными предложениями, стрелками переключения, точками-индикаторами и автоматической прокруткой.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Наполнение базы данных:</strong> добавление товаров в таблицу products, указание названий, цен, изображений, категорий и детальной информации о товарах.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>История заказов:</strong> реализация вывода заказов в личном кабинете пользователя с отображением номера заказа, даты, суммы, статуса, способа оплаты и списка товаров.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Корзина и оформление заказа:</strong> разработка структуры страницы корзины, блока с товарами, итоговой стоимостью, формой доставки, контактными данными и выбором способа оплаты.</span>\n        </li>\n        <li class=\"dev-list-item\">\n            <span><strong>Работа с шаблонами и базой данных:</strong> использование HTML-шаблонов страниц и подстановка данных из БД для динамического отображения товаров и заказов.</span>\n        </li>\n    </ul>\n    <div class=\"dev-footer\">\n        Стек: Figma, HTML, CSS, JavaScript, PHP, MySQL • GitHub-репозиторий с ежедневными коммитами\n    </div>\n</div>\n			', '<h2>Мы крутые !</h2>', 0);
+(34, 'team', 'Наша команда', '<div class=\"dev-card\">\r\n    <div class=\"dev-header\">\r\n        <h2 class=\"dev-name\">Бакулев Михаил</h2>\r\n        <span class=\"dev-badge\">Full‑stack разработчик</span>\r\n    </div>\r\n    <ul class=\"dev-list\">\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Проектирование макетов</strong> для основных страниц сайта: админка и главная.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Динамическая маршрутизация</strong> на PHP, шаблонизация страниц через базу данных (таблица pages).</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Авторизация и регистрация</strong> с хешированием паролей (password_hash/verify), разграничение ролей (пользователь, модератор, администратор).</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Корзина товаров</strong> на сессиях + AJAX (добавление/удаление, изменение количества, промокоды с динамическим пересчётом).</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Административная панель</strong> с CRUD для товаров, пользователей, отзывов, страниц, акций и заказов; модерация отзывов.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Оформление заказа</strong> с выбором способа оплаты (наценка 5% при наложенном платеже), сохранением в БД и очисткой корзины.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Поиск, сортировка и фильтрация</strong> товаров по категориям, оптимизация БД (индексы на slug, login, name).</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Отзывы с премодерацией</strong>: отправка через AJAX только авторизованными, отображение после одобрения модератором.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Проектирование БД</strong> (таблицы products, users, orders, reviews, pages, stock, contact) и ежедневные коммиты в GitHub.</span>\r\n        </li>\r\n    </ul>\r\n    <div class=\"dev-footer\">\r\n        Стек: Figma, HTML, CSS, JavaScript (AJAX/Fetch), PHP, MySQL • GitHub-репозиторий с ежедневными коммитами\r\n    </div>\r\n</div>\r\n\r\n<div class=\"dev-card\">\r\n    <div class=\"dev-header\">\r\n        <h2 class=\"dev-name\">Сухарева Ангелина</h2>\r\n        <span class=\"dev-badge\">Full-stack разработчик</span>\r\n    </div>\r\n    <ul class=\"dev-list\">\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Проектирование макетов</strong> для основных страниц сайта: профиль, вход, регистрация, контакты, акции, управление профилем</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Разработка модуля вывода акций:</strong> написание PHP-скриптов для динамической подстановки данных вместо маркеров на страницах, загружаемых из БД.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Работа с базой данных:</strong> проектирование структуры таблицы для акций, а также наполнение таблиц товаров и акций информацией.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Верстка пользовательских интерфейсов:</strong> создание HTML/CSS-кода для главной страницы, контактов, форм авторизации, личного кабинета и управления профилем.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Оптимизация CSS:</strong> очистка стилей от дублирующего кода и оптимизация файлов для ускорения загрузки страниц.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Разработка визуальных макетов:</strong> проектирование внешнего вида страниц акций, контактов, форм авторизации, личного кабинета и разделов управления профилем.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Тестирование и отладка:</strong> проверка корректности отображения верстки в браузерах и исправление ошибок.</span>\r\n        </li>\r\n    </ul>\r\n    <div class=\"dev-footer\">\r\n        Стек: Figma, HTML, CSS, PHP, MySQL.\r\n    </div>\r\n</div>\r\n\r\n<div class=\"dev-card\">\r\n    <div class=\"dev-header\">\r\n        <h2 class=\"dev-name\">Рагазина Елена</h2>\r\n        <span class=\"dev-badge\">Full‑stack разработчик</span>\r\n    </div>\r\n    <ul class=\"dev-list\">\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Проектирование макетов</strong> для основных страниц сайта: каталог, категории товаров, детальная страница товара, отзывы, «О нас», корзина и оформление заказа.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>HTML- и CSS-вёрстка</strong> страниц каталога, категорий, отзывов, страницы «О нас», корзины и оформления заказа с учётом общей стилистики интернет-магазина.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Слайдер на главной странице:</strong>Слайдер на главной странице: добавление интерактивного блока с акционными предложениями, стрелками переключения, точками-индикаторами и автоматической прокруткой.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Наполнение базы данных:</strong> добавление товаров в таблицу products, указание названий, цен, изображений, категорий и детальной информации о товарах.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>История заказов:</strong> реализация вывода заказов в личном кабинете пользователя с отображением номера заказа, даты, суммы, статуса, способа оплаты и списка товаров.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Корзина и оформление заказа:</strong> разработка структуры страницы корзины, блока с товарами, итоговой стоимостью, формой доставки, контактными данными и выбором способа оплаты.</span>\r\n        </li>\r\n        <li class=\"dev-list-item\">\r\n            <span><strong>Работа с шаблонами и базой данных:</strong> использование HTML-шаблонов страниц и подстановка данных из БД для динамического отображения товаров и заказов.</span>\r\n        </li>\r\n    </ul>\r\n    <div class=\"dev-footer\">\r\n        Стек: Figma, HTML, CSS, JavaScript, PHP, MySQL • GitHub-репозиторий с ежедневными коммитами\r\n    </div>\r\n</div>', '<h2>Мы крутые !</h2>', 0);
 
 -- --------------------------------------------------------
 
@@ -408,43 +409,43 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `contact_you`
 --
 ALTER TABLE `contact_you`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT для таблицы `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT для таблицы `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT для таблицы `stock`
 --
 ALTER TABLE `stock`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
