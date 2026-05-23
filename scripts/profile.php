@@ -85,102 +85,92 @@
     $title = $page['title'] ?? 'Профиль';
     $header_content = $page['header_content'];
 
-    if (!function_exists('hd_e')) {
-        function hd_e($value) {
-            return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    function hd_e($value) {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
+
+    function hd_format_price($price) {
+        return number_format((float)$price, 0, '', ' ');
+    }
+
+    function hd_format_date_ru($date) {
+        $months = [
+            1 => 'января',
+            2 => 'февраля',
+            3 => 'марта',
+            4 => 'апреля',
+            5 => 'мая',
+            6 => 'июня',
+            7 => 'июля',
+            8 => 'августа',
+            9 => 'сентября',
+            10 => 'октября',
+            11 => 'ноября',
+            12 => 'декабря',
+        ];
+
+        $time = strtotime($date);
+
+        if (!$time) {
+            return '';
+        }
+
+        $day = date('j', $time);
+        $month = $months[(int)date('n', $time)];
+        $year = date('Y', $time);
+
+        return $day . ' ' . $month . ' ' . $year;
+    }
+
+    function hd_status_info($status) {
+        $status = strtolower((string)$status);
+
+        switch ($status) {
+            case 'delivered':
+                return [
+                    'text' => 'Доставлено',
+                    'class' => 'delivered'
+                ];
+
+            case 'cancel':
+            case 'cancelled':
+                return [
+                    'text' => 'Отменён',
+                    'class' => 'cancel'
+                ];
+
+            case 'new':
+                return [
+                    'text' => 'Оформлен',
+                    'class' => 'process'
+                ];
+
+            case 'process':
+            case 'processing':
+            default:
+                return [
+                    'text' => 'В пути',
+                    'class' => 'process'
+                ];
         }
     }
 
-    if (!function_exists('hd_format_price')) {
-        function hd_format_price($price) {
-            return number_format((float)$price, 0, '', ' ');
-        }
-    }
+    function hd_payment_name($payment) {
+        switch ($payment) {
+            case 'cash':
+                return 'Наличными при получении';
 
-    if (!function_exists('hd_format_date_ru')) {
-        function hd_format_date_ru($date) {
-            $months = [
-                1 => 'января',
-                2 => 'февраля',
-                3 => 'марта',
-                4 => 'апреля',
-                5 => 'мая',
-                6 => 'июня',
-                7 => 'июля',
-                8 => 'августа',
-                9 => 'сентября',
-                10 => 'октября',
-                11 => 'ноября',
-                12 => 'декабря',
-            ];
+            case 'card':
+                return 'Банковской картой при получении';
 
-            $time = strtotime($date);
+            case 'sberbank':
+                return 'Перевод на карту Сбербанка';
 
-            if (!$time) {
-                return '';
-            }
+            case 'cod':
+                return 'Наложенный платёж';
 
-            $day = date('j', $time);
-            $month = $months[(int)date('n', $time)];
-            $year = date('Y', $time);
-
-            return $day . ' ' . $month . ' ' . $year;
-        }
-    }
-
-    if (!function_exists('hd_status_info')) {
-        function hd_status_info($status) {
-            $status = strtolower((string)$status);
-
-            switch ($status) {
-                case 'delivered':
-                    return [
-                        'text' => 'Доставлено',
-                        'class' => 'delivered'
-                    ];
-
-                case 'cancel':
-                case 'cancelled':
-                    return [
-                        'text' => 'Отменён',
-                        'class' => 'cancel'
-                    ];
-
-                case 'new':
-                    return [
-                        'text' => 'Оформлен',
-                        'class' => 'process'
-                    ];
-
-                case 'process':
-                case 'processing':
-                default:
-                    return [
-                        'text' => 'В пути',
-                        'class' => 'process'
-                    ];
-            }
-        }
-    }
-
-    if (!function_exists('hd_payment_name')) {
-        function hd_payment_name($payment) {
-            switch ($payment) {
-                case 'cash':
-                    return 'Наличными при получении';
-
-                case 'card':
-                    return 'Банковской картой при получении';
-
-                case 'sberbank':
-                    return 'Перевод на карту Сбербанка';
-
-                case 'cod':
-                    return 'Наложенный платёж';
-
-                default:
-                    return $payment;
-            }
+            default:
+                return $payment;
         }
     }
 
