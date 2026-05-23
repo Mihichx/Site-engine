@@ -98,7 +98,7 @@
             $content .= '<h2>' . $config['title'] . '</h2>';
             $jsFieldsList = json_encode(array_keys($config['fields']));
             
-            if (!in_array($slug, ['reviews1', 'order1'])) {
+            if (!in_array($slug, ['reviews1', 'order1', 'users'])) {
                 $content .= "<button class='admin-button btn-green' onclick='openModal($jsFieldsList)'>+ Добавить запись</button>";
             }
 
@@ -149,7 +149,7 @@
             $content .= '</tbody></table>';
 
             // Рендер модального окна
-            if ($slug !== 'reviews1') {
+            if ($slug !== 'reviews1' && $slug !== 'users') {
                 $content .= '
                 <div id="dynamicModal" class="admin-modal">
                     <div class="admin-modal-content">
@@ -200,7 +200,7 @@
                 <p>Вы успешно вошли как: <strong>' . htmlspecialchars($_SESSION['user']['login']) . '</strong> (' . htmlspecialchars($user_role) . ')</p>
                 <p style="margin-top: 20px; color: #555;">Используйте навигационное меню для работы.</p>
                 <div style="margin-top: 40px;">
-                    <form method="POST">
+                    <form method="POST" data-no-ajax>
                         <input type="hidden" name="logout" value="1">
                         <button class="admin-button btn-red" style="padding:10px 25px; font-size:15px;" type="submit">Выйти из системы</button>
                     </form>
